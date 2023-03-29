@@ -5,7 +5,7 @@ class Solution {
         int[] cnt = new int[n];
         for(int i=0; i<n; i++) {
             arr[i] = i+1;
-            cnt[i] = 0;
+            cnt[i]=0;
         }
         
         for(int i=0; i<n; i++) {
