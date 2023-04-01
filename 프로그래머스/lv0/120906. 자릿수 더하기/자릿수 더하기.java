@@ -6,13 +6,16 @@ class Solution {
         int[] num = new int[str.length()];
         
         for(int i=0; i<str.length(); i++) {
-            c[i] = str.charAt(i);
-            num[i] = c[i] - '0';
+            answer += str.charAt(i)-'0';
         }
         
+/*        for(int i=0; i<str.length(); i++) {
+            c[i] = str.charAt(i);
+            num[i] = c[i] - '0';
+        }        
         for(int i=0; i<num.length; i++) {
             answer += num[i];
-        }
+        }*/
         
         return answer;
     }
