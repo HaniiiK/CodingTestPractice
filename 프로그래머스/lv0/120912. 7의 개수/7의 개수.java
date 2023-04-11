@@ -1,17 +1,13 @@
 class Solution {
     public int solution(int[] array) {
         int answer = 0;
-        String[] str = new String[array.length];
+        String s = "";        
         for(int i=0; i<array.length; i++) {
-            str[i] = array[i]+"";
-        }
-        String fin = null;
-        for(int i=0; i<str.length; i++) {
-            fin += str[i];
+            s += array[i];
         }
         
-        for(int i=0; i<fin.length(); i++) {
-            if(fin.charAt(i)=='7') {
+        for(int i=0; i<s.length(); i++) {
+            if(s.charAt(i)=='7') {
                 answer ++;
             }
         }
