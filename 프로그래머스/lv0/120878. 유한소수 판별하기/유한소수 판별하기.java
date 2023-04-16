@@ -28,7 +28,6 @@ class Solution {
                 index2++;
             }
         }
-        
         for(int i=0; i<index1; i++) {
             for(int j=0; j<index2; j++) {
                 if(arr1[i]==arr2[j]) {
