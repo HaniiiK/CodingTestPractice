@@ -4,11 +4,15 @@ class Solution {
         String str = "";
         int[] c = new int[j-i+1];
         
-        for(int p=0; p<c.length; p++) {
+        for(int l=0; l<j-i+1; l++) {
+            str += i+l+"";
+        }
+        
+/*        for(int p=0; p<c.length; p++) {
         	c[p] = i;
         	i++;
             str += c[p]+"";
-        }
+        }*/
         
         for(int p=0; p<str.length(); p++) {
             if((str.charAt(p)-'0')==k) {
