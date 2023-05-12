@@ -6,6 +6,7 @@ class Solution {
             answer += arr[i];
         }
         answer /= arr.length;
+        
         return answer;
     }
 }
