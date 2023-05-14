@@ -24,6 +24,7 @@ class Solution {
         }
         ans = ans.remainder(BigInteger.valueOf(1234567));
         answer = ans.intValue();*/
+        
         return answer;
     }
 }
