@@ -18,8 +18,8 @@ class Solution {
         }
 
         int max = cnt[0];
-        int tmp = 0;
-        int chk = 1;
+        int tmp = 0; //가장 문제를 많이 맞힌 사람 idx (chk=1일 경우 유의미)
+        int chk = 1; //가장 문제를 많이 맞힌 사람 수
         for(int i=1; i<3; i++) { //max값 구하기
             if(cnt[i]>max) {
                 max = cnt[i];
