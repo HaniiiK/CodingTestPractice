@@ -1,8 +1,8 @@
 class Solution {
     public int solution(int[][] sizes) {
         int answer = 0;
-        int max_total = 0;
-        int max_pair = 0;
+        int max_total = 0; //전체 중 최대
+        int max_pair = 0; //최대의 짝꿍
         
         for(int i=0; i<sizes.length; i++) {
             for(int j=0; j<sizes[i].length; j++) {
@@ -17,7 +17,7 @@ class Solution {
             }
         }
         
-        int smaller=0;
+        int smaller=0; //페어 중 더 작은 수
         for(int i=0; i<sizes.length; i++) {
             if(sizes[i][0]<sizes[i][1]) {
                 smaller = sizes[i][0];
@@ -30,8 +30,6 @@ class Solution {
             }
         }
         
-        System.out.println(max_total);
-        System.out.println(max_pair);
         answer = max_total * max_pair;
         return answer;
     }
