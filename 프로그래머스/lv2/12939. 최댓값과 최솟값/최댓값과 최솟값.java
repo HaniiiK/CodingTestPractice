@@ -11,7 +11,6 @@ class Solution {
         Arrays.sort(arr);
         
         answer = arr[0]+" "+arr[arr.length-1];
-        
         return answer;
     }
 }
