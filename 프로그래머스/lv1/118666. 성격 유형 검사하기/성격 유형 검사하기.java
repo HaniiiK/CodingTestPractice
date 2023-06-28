@@ -2,6 +2,7 @@ class Solution {
     public String solution(String[] survey, int[] choices) {
         String answer = "";
         int[] cnt = new int[8]; //R T / C F / J M / A N 순서
+        String[][] letter = {{"R","T"}, {"C","F"}, {"J","M"}, {"A","N"}};
         
         for(int i=0; i<survey.length; i++) {
             switch(survey[i]) {
@@ -63,29 +64,38 @@ class Solution {
                     break;
             }
         }
-        if(cnt[0]>=cnt[1]) {
-            answer += "R";
-        }else if(cnt[0]<cnt[1]) {
-            answer += "T";
+        
+        for(int i=0; i<4; i++) {
+            if(cnt[i*2]>=cnt[i*2+1]) {
+                answer += letter[i][0];
+            }else if(cnt[i*2]<cnt[i*2+1]) {
+                answer += letter[i][1];
+            }
         }
+        
+//         if(cnt[0]>=cnt[1]) {
+//             answer += "R";
+//         }else if(cnt[0]<cnt[1]) {
+//             answer += "T";
+//         }
 
-        if(cnt[2]>=cnt[3]) {
-            answer += "C";
-        }else if(cnt[2]<cnt[3]) {
-            answer += "F";
-        }
+//         if(cnt[2]>=cnt[3]) {
+//             answer += "C";
+//         }else if(cnt[2]<cnt[3]) {
+//             answer += "F";
+//         }
 
-        if(cnt[4]>=cnt[5]) {
-            answer += "J";
-        }else if(cnt[4]<cnt[5]) {
-            answer += "M";
-        }
+//         if(cnt[4]>=cnt[5]) {
+//             answer += "J";
+//         }else if(cnt[4]<cnt[5]) {
+//             answer += "M";
+//         }
 
-        if(cnt[6]>=cnt[7]) {
-            answer += "A";
-        }else if(cnt[6]<cnt[7]) {
-            answer += "N";
-        }
+//         if(cnt[6]>=cnt[7]) {
+//             answer += "A";
+//         }else if(cnt[6]<cnt[7]) {
+//             answer += "N";
+//         }
         return answer;
     }
 }
