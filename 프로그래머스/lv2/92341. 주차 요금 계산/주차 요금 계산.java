@@ -1,35 +1,38 @@
 import java.util.*;
 
 class Solution {
-    public int[] solution(int[] fees, String[] records) {        
-        Map<String, Integer> car = new HashMap<>(); //차번호, 시간 저장
-        Map<String, Boolean> isOut = new HashMap<>(); //차번호, 나갔는지 저장
-        List<String> carNumber = new ArrayList<>(); //차번호만 저장
+
+    Map<String, Integer> car = new HashMap<>(); //차번호, 시간
+    Map<String, Boolean> isOut = new HashMap<>(); //차번호, 나갔는지
+    List<String> carNumber = new ArrayList<>(); //차번호
+    
+    public int[] solution(int[] fees, String[] records) {
 
         int in=0; int out=0; int accum=0;
+        int time=0;
         for(int i=0; i<records.length; i++) {
             String[] carInfo = records[i].split(" ");
+            String[] timeSeperate = carInfo[0].split(":");
+            time = Integer.parseInt(timeSeperate[0])*60 + Integer.parseInt(timeSeperate[1]);
             
             if(carInfo[2].equals("IN")) {
-                if(car.containsKey(carInfo[1])) { //이미 Map에 저장되어있는 차번호면
-                    String[] inTime = carInfo[0].split(":");
-                    in = Integer.parseInt(inTime[0])*60 + Integer.parseInt(inTime[1]);
-                    accum = car.get(carInfo[1]);
-                    car.replace(carInfo[1], in-accum); //새로 들어온 시간 - 누적 시간
-                    isOut.replace(carInfo[1], false);
+                if(car.containsKey(carInfo[1])) { //들어왔던 적 있는 차
+                    calcTime(carInfo[1], time, car.get(carInfo[1]), false);
+                    // accum = car.get(carInfo[1]);
+                    // car.replace(carInfo[1], time-accum); //새로 들어온 시간 - 누적 시간
+                    // isOut.replace(carInfo[1], false);
                 }else { //처음 들어오는 차
-                    carNumber.add(carInfo[1]);
-                    String[] inTime = carInfo[0].split(":");
-                    in = Integer.parseInt(inTime[0])*60 + Integer.parseInt(inTime[1]);
-                    car.put(carInfo[1], in); //들어온 시간
-                    isOut.put(carInfo[1], false);
+                    calcTime(carInfo[1], time, 0, false);
+                    // carNumber.add(carInfo[1]);
+                    // car.put(carInfo[1], time); //들어온 시간
+                    // isOut.put(carInfo[1], false);
                 }
-            }else if(carInfo[2].equals("OUT")) { //IN 없이 OUT만 있는 경우는 없다고 가정하고
-                String[] outTime = carInfo[0].split(":");
-                out = Integer.parseInt(outTime[0])*60 + Integer.parseInt(outTime[1]);
-                in = car.get(carInfo[1]);
-                car.replace(carInfo[1], out-in); //머물렀던 시간
-                isOut.replace(carInfo[1], true);
+            }else if(carInfo[2].equals("OUT")) {
+                calcTime(carInfo[1], time, car.get(carInfo[1]), true);
+                
+                // in = car.get(carInfo[1]);
+                // car.replace(carInfo[1], time-in); //머물렀던 시간
+                // isOut.replace(carInfo[1], true);
             }
         }
         
@@ -38,7 +41,6 @@ class Solution {
         Arrays.sort(sortCarNumber);
 
         for(int i=0; i<carNumber.size(); i++) {
-            
             if(!isOut.get(sortCarNumber[i])) { //OUT했는지 확인
                 out = 23*60 + 59;
                 in = car.get(sortCarNumber[i]);
@@ -51,9 +53,22 @@ class Solution {
                 double t = Math.ceil((car.get(sortCarNumber[i])-fees[0])/(double)fees[2]);
                 answer[i] += t * fees[3];
             }
-//            System.out.println(sortCarNumber[i]+","+answer[i]);
         }
-        
         return answer;
     }
+    
+    /*
+    차번호, 현재 기록된 시간, 기록되어있던 시간, OUT인지 체크    
+    */
+    public void calcTime(String carNum, int presentTime, int pastTime, boolean outChk) {
+        if(!carNumber.contains(carNum)) { //처음 들어오는 차
+            carNumber.add(carNum);
+            car.put(carNum, presentTime);
+            isOut.put(carNum, outChk);
+        }else {
+            car.replace(carNum, presentTime-pastTime);
+            isOut.replace(carNum, outChk);
+        }
+    }
+    
 }
