@@ -2,7 +2,6 @@ import java.util.*;
 
 class Solution {
     public String[] solution(String[] record) {
-//        List<String> answerList = new ArrayList<>();
         Map<String, String> uid = new HashMap<>(); //uid, 닉네임
         List<String> enterChk = new ArrayList<>(); //"uid Enter", "uid Leave" 이런 식으로 저장
         
@@ -13,7 +12,7 @@ class Solution {
                 if(!uid.containsKey(str[1])) {
                     uid.put(str[1], str[2]); //처음 들어온 사람이면 그냥 추가
                 }else {
-                    if(!uid.get(str[1]).equals(str[2])) {
+                    if(!uid.get(str[1]).equals(str[2])) { //들어왔던 적 있는 사람의 닉네임이 바뀐 경우
                         uid.replace(str[1], str[2]);
                     }
                 }
