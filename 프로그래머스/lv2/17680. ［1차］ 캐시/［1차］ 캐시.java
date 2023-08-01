@@ -19,7 +19,6 @@ class Solution {
                         if(list.get(j).equals(cities[i])) {
                             list.remove(j);
                             list.add(cities[i]); //제거하고 제일 끝에 넣어주기
-//                            System.out.println("제일앞!"+list.get(0));
                             break;
                         }
                     }
@@ -31,10 +30,8 @@ class Solution {
                         list.remove(0);
                         list.add(cities[i]);
                         answer+=5;
-//                        System.out.println("이거야?");
                     }
                 }
-//                System.out.println(cities[i]+","+answer);
             }
         }
         
