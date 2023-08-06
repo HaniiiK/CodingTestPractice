@@ -25,10 +25,8 @@ class Solution {
             for(int j=1; j<map[0].length-1; j++) {
                 sum = 0;
                 if(map[i][j]!='X') {
-//                    System.out.print(map[i][j]);
                     sum = dfs(map, i, j);
                     if(sum!=0) {
-  //                      System.out.println(","+sum);
                         answerList.add(sum);
                     }
                 }
