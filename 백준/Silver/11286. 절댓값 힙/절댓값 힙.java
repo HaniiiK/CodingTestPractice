@@ -13,11 +13,15 @@ public class Main {
         PriorityQueue<Integer> pq = new PriorityQueue<>(new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
-
+                /**
+                 * return값이 양수: o1(새로 들어온 값)이 o2 뒤에 추가됨
+                 * return값이 음수: o1(새로 들어온 값)이 o2 앞에 추가됨
+                 * else if 케이스: o1이 양수면 o2 뒤에, o1이 음수면 o2 앞에
+                 */
                 if(Math.abs(o1)>Math.abs(o2)) {
                     return 1;
                 }else if(Math.abs(o1)==Math.abs(o2)) {
-                    return o1-o2; //return값이 양수면 뒤에 저장될테고 음수면 앞에 저장될테임
+                    return o1-o2;
                 }else {
                     return -1;
                 }
@@ -25,7 +29,6 @@ public class Main {
         });
 
         StringBuffer sb = new StringBuffer();
-
         int x;
         for(int i=0; i<N; i++) {
             x = Integer.parseInt(br.readLine());
@@ -33,10 +36,10 @@ public class Main {
             if(x!=0) {
                 pq.offer(x);
             }else {
-                if(pq.size()==0) {
+                if(pq.isEmpty()) {
                     sb.append("0\n");
                 }else {
-                    sb.append(pq.remove()+"\n");
+                    sb.append(pq.poll()+"\n");
                 }
             }
         }
