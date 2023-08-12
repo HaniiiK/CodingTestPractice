@@ -14,12 +14,11 @@ class Solution {
         List<Integer> answerList = new ArrayList<>();
         
         int i, j;
-        int pre, next;
+        int pre, next; //pre: 지금 자리에 넣을 전 숫자, next: 다음 자리에 넣을 지금 숫자 저장
         int min;
         for(int k=0; k<queries.length; k++) {
             i = queries[k][0]-1;
             j = queries[k][1]-1;
-            pre = board[i][j];
             next = board[i][j];            
             min = board[i][j];
             
@@ -36,7 +35,6 @@ class Solution {
                 }
                 next = board[i][j];
                 board[i][j] = pre;
-//                System.out.println(board[i][j]+": "+i+", "+j);
 
                 if(board[i][j]<min) {
                     min = board[i][j];
@@ -53,7 +51,6 @@ class Solution {
         for(int k=0; k<answerList.size(); k++) {
             answer[k] = answerList.get(k);
         }
-        
         return answer;
     }
 }
