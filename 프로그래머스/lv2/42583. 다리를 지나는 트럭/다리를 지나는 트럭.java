@@ -51,13 +51,7 @@ class Solution {
             if(bridgeWeight==0 && idx==truck_weights.length) {
                 break;
             }
-            // for(int k=0; k<truck_weights.length; k++) {
-            //     System.out.println(k+", "+passedTime[k]);
-            // }
-            // System.out.println();
         }
-        
-
         return answer;
     }
 }
