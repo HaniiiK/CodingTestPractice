@@ -3,7 +3,7 @@ import java.util.*;
 class Solution {
     public String solution(String X, String Y) {
         
-        int[] cntX = new int[10]; //각 인덱스에 해당하는 숫자가 몇 개인지
+        int[] cntX = new int[10];
         int[] cntY = new int[10];
         for(int i=0; i<X.length(); i++) {
             cntX[X.charAt(i)-'0']++;
