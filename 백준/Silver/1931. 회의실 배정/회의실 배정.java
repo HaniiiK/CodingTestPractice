@@ -19,13 +19,17 @@ public class Main {
             st = new StringTokenizer(br.readLine());
             start = Long.parseLong(st.nextToken());
             end = Long.parseLong(st.nextToken());
-            if(start==end) { //바로 카운팅해줌
+
+            //시작&종료 같은건 바로 카운팅
+            if(start==end) {
                 answer++;
             }
 
-            if(map.containsKey(start)) { //시작 시간이 같은 게 들어오면
+            if(map.containsKey(start)) {
                 long value = map.get(start);
-                if((start!=end && value>end) || start==value) { //더 짧은 시간으로 저장하되, 시작시간이랑 종료시간 같은건 무시함
+
+                //더 짧은 시간으로 저장하되, 시작&종료 같은건 무시함
+                if((start!=end && value>end) || start==value) {
                     map.replace(start, end);
                 }
             }else {
@@ -58,18 +62,19 @@ public class Main {
 
         while (!queue.isEmpty()) {
             long[] poll = queue.poll();
+
             if(pre[1] > poll[1]) { //0 6, 1 4같은 경우
                 if(poll[0] == poll[1]) { //0 6, 1 1같은 경우
                     answer--;
                 }
-                saveEnd = poll[1]; //1 4를 한거로 치는거임
+                saveEnd = poll[1];
                 pre[0] = poll[0];
                 pre[1] = poll[1];
             }else if(pre[1] <= poll[1] && saveEnd <= poll[0]) { //0 6, 6 7같은 경우
-                saveEnd = poll[1];
                 if(poll[0]!=poll[1]) {
                     answer++;
                 }
+                saveEnd = poll[1];
                 pre[0] = poll[0];
                 pre[1] = poll[1];
             }
@@ -77,5 +82,4 @@ public class Main {
 
         System.out.println(answer);
     }
-
 }
