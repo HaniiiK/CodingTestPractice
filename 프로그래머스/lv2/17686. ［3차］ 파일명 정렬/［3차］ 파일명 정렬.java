@@ -45,13 +45,11 @@ class Solution {
                 break;
             }
         }
-//        System.out.println(number);
         
         for(; idx<s.length(); idx++) {
             tail += s.charAt(idx);
         }
         
-        String[] file = {head.toLowerCase(), number, tail};
-        return file;
+        return new String[]{head.toLowerCase(), number, tail};
     }
 }
