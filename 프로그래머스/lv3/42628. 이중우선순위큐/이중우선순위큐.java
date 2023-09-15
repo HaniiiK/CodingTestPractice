@@ -4,18 +4,8 @@ class Solution {
     public int[] solution(String[] operations) {
         int[] answer = new int[2];
         
-        PriorityQueue<Integer> queueAsc = new PriorityQueue<>(new Comparator<Integer>(){
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o2-o1;
-            }
-        });
-        PriorityQueue<Integer> queueDes = new PriorityQueue<>(new Comparator<Integer>(){
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o1-o2;
-            }
-        });
+        PriorityQueue<Integer> queueAsc = new PriorityQueue<>(Collections.reverseOrder());
+        PriorityQueue<Integer> queueDes = new PriorityQueue<>();
         
         int cntI = 0;
         int cntD = 0;
@@ -27,10 +17,8 @@ class Solution {
             }else if(operations[i].charAt(0)=='D') {
                 cntD++;
                 if(operations[i].charAt(2)=='-') {
-//                    System.out.println(queueDes.peek());
                     queueDes.poll();
                 }else if(operations[i].charAt(2)=='1') {
-  //                  System.out.println(queueAsc.peek());
                     queueAsc.poll();                    
                 }
                 if(cntI<=cntD) {
@@ -38,7 +26,7 @@ class Solution {
                     queueAsc.clear();
                     cntI = 0;
                     cntD = 0;
-                    continue; //큐가 비어있을 때 일단 임시로
+                    continue;
                 }
             } 
         }
