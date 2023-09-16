@@ -3,7 +3,6 @@ import java.util.*;
 class Solution {
     public int[] solution(String[] operations) {
         int[] answer = new int[2];
-        
         PriorityQueue<Integer> queueAsc = new PriorityQueue<>(Collections.reverseOrder());
         PriorityQueue<Integer> queueDes = new PriorityQueue<>();
         
