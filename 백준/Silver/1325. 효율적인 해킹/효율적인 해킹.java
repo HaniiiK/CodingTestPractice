@@ -1,50 +1,69 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-    int n, m, max;
-    boolean[] visit;
-    List<Integer>[] g;
-    int[] res;
-    private void solution() throws IOException {
+class Main {
+
+    static List<Integer>[] list;
+    static boolean[] visited;
+    static int[] answerArr;
+    static Queue<Integer> queue;
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        n = Integer.parseInt(st.nextToken());
-        m = Integer.parseInt(st.nextToken());
-        res = new int[n+1];
-        g = new ArrayList[n+1];
-        for(int i=1; i<=n; i++){
-            g[i] = new ArrayList<>();
+
+        int n = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
+
+        list = new ArrayList[n];
+        for(int i=0; i<n; i++) {
+            list[i] = new ArrayList<>();
         }
-        for(int i=0; i<m; i++){
+
+        for(int i=0; i<m; i++) {
             st = new StringTokenizer(br.readLine());
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken());
-            g[a].add(b);
+
+            list[a-1].add(b-1);
         }
-        for(int i=1; i<=n; i++){
-            visit = new boolean[n+1];
-            dfs(i);
+
+        answerArr = new int[n];
+
+        queue = new LinkedList<>();
+        for(int i=0; i<n; i++) {
+            visited = new boolean[n];
+            queue.offer(i);
+            bfs();
         }
-        max = Arrays.stream(res).max().getAsInt();
-        for(int i = 1; i <= n; i++){
-            if(res[i] != max) continue;
-            bw.write(i + " ");
+
+        int max = Arrays.stream(answerArr).max().getAsInt();
+        StringBuffer sb = new StringBuffer();
+        for(int i=0; i<n; i++) {
+            if(answerArr[i]==max) {
+                sb.append(i+1+" ");
+            }
         }
-        bw.flush();
+
+        System.out.println(sb.toString());
     }
 
-    private void dfs(int v) {
-        if(visit[v]) return;
-        visit[v] = true;
-        res[v]++;
-        for(int a: g[v]){
-            dfs(a);
+    private static void bfs() {
+        if(queue.isEmpty()) {
+            return;
         }
+
+        int tmp = queue.poll();
+        visited[tmp] = true;
+        answerArr[tmp]++;
+        for(int i=0; i<list[tmp].size(); i++) {
+            if(!visited[list[tmp].get(i)]) {
+                visited[list[tmp].get(i)] = true;
+                queue.offer(list[tmp].get(i));
+            }
+        }
+
+        bfs();
     }
 
-    public static void main(String[] args) throws IOException {
-        new Main().solution();
-    }
 }
