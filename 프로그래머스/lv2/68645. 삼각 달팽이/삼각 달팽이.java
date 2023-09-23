@@ -1,8 +1,6 @@
 class Solution {
     public int[] solution(int n) {        
-        /**
-         *  각 행별로 열 생성
-         **/
+        //행별로 열 생성
         int[][] tmp = new int[n][];
         for(int i=0; i<n; i++) {
             tmp[i] = new int[i+1];
@@ -35,6 +33,7 @@ class Solution {
             }
         }
         
+        //정답 추출
         int idx = 0;
         for(int i=0; i<n; i++) {
             for(int j=0; j<tmp[i].length; j++) {
