@@ -9,12 +9,9 @@ class Solution {
             }
         }
         
-        // boolean waterExistX = false;
-        // boolean waterExistY = false;
         visited[0][0] = 1;
         for(int i=0; i<n; i++) {
             for(int j=0; j<m; j++) {
-                
                 if(visited[i][j]!=-1) {
                     if(i>=1 && visited[i-1][j]!=-1) {
                         visited[i][j] += visited[i-1][j];
@@ -23,39 +20,7 @@ class Solution {
                         visited[i][j] += visited[i][j-1];
                     }
                     visited[i][j] %= 1000000007;
-                    
                 }
-            
-                // if(i==0) {
-                //     if(visited[i][j]==-1) {
-                //         waterExistX = true;
-                //     }
-                //     if(visited[i][j]!=-1 && waterExistX) {
-                //         visited[i][j] = 0;
-                //     }else if(visited[i][j]!=-1 && !waterExistX) {
-                //         visited[i][j] = 1;
-                //     }
-                // }else if(j==0) {
-                //     if(visited[i][j]==-1) {
-                //         waterExistY = true;
-                //     }
-                //     if(visited[i][j]!=-1 && waterExistY) {
-                //         visited[i][j] = 0;
-                //     }else if(visited[i][j]!=-1 && !waterExistY)  {
-                //         visited[i][j] = 1;
-                //     }
-                // }else {
-                //     if(visited[i][j]!=-1) {
-                //         int sum = 0;
-                //         if(visited[i-1][j]!=-1) {
-                //             sum += visited[i-1][j];
-                //         }
-                //         if(visited[i][j-1]!=-1) {
-                //             sum += visited[i][j-1];
-                //         }
-                //         visited[i][j] = sum%1000000007;
-                //     }
-                // }
             }
         }
         int answer = visited[n-1][m-1];
