@@ -16,7 +16,6 @@ class Solution {
     } 
     
     public int solution(String begin, String target, String[] words) {
-        
         queue = new LinkedList<>();
         visited = new boolean[words.length];
         
