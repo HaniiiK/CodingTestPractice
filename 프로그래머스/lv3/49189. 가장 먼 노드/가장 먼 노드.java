@@ -36,6 +36,7 @@ class Solution {
         
         int[] tmp = queue.poll();
         visited[tmp[0]] = true;
+        
         if(tmp[1]>max) {
             max = tmp[1];
             answer = 1;
@@ -48,27 +49,8 @@ class Solution {
                 visited[list[tmp[0]].get(i)] = true;
                 queue.offer(new int[]{list[tmp[0]].get(i), tmp[1]+1});
             }
-        }
-        
+        }        
         bfs();
     }
     
-    private void dfs(int idx, int cnt) {
-        visited[idx] = true;
-        
-        if(cnt>max) {
-            max = cnt;
-            answer = 1;
-        }else if(cnt==max) {
-            answer++;
-        }
-        
-        for(int i=0; i<list[idx].size(); i++) {
-            if(!visited[list[idx].get(i)]) {
-                visited[list[idx].get(i)] = true;
-                dfs(list[idx].get(i), cnt+1);
-            }
-        }
-        
-    }
 }
