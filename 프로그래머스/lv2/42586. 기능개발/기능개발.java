@@ -4,6 +4,7 @@ class Solution {
     public int[] solution(int[] progresses, int[] speeds) {        
         int sub = 0;
         int[] day = new int[progresses.length];
+        
         for(int i=0; i<progresses.length; i++) {
             sub = 100;
             while(true) {
@@ -33,6 +34,7 @@ class Solution {
         for(int i=0; i<list.size(); i++) {
             answer[i] = list.get(i);
         }        
+        
         return answer;
     }
 }
