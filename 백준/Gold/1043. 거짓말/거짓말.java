@@ -6,8 +6,6 @@ public class Main {
     static int n;
     static int[] arr;
     static Set<Integer> truth;
-    static Queue<Integer> queue;
-    static boolean[] visited;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -50,9 +48,6 @@ public class Main {
         /**
          * 정답 추려내기
          */
-//        queue = new LinkedList<>();
-//        visited = new boolean[n+1];
-
         int answer = 0;
         boolean done;
         for(int i=0; i<m; i++) {
