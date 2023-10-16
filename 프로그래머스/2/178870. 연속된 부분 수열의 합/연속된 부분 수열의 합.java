@@ -1,46 +1,39 @@
-import java.util.*;
-
 class Solution {
     public int[] solution(int[] sequence, int k) {
         int[] answer = new int[2];
-        Queue<Integer> queue = new LinkedList<>();
-        
         int idx = 0;
-        int sum = 0, cnt = 1000001;
         int first = 0, last = 0;
+        int sum = 0, cnt = 1000001;
 
-        while(true) {
+        while(idx<sequence.length) {
             sum += sequence[idx];
-            last = idx;
-            queue.offer(sequence[idx++]);
+            last = idx++;
             
             if(sum==k) {
-                if(queue.size() < cnt) {
+                if(last-first+1 < cnt) {
                     answer[0] = first;
                     answer[1] = last;
-                    cnt = queue.size();
+                    cnt = last-first+1;
                 }
             }else if(sum>k) {
                 while(true) {
-                    int poll = queue.poll();
-                    sum -= poll;
-                    first++;
+                    sum -= sequence[first++];
                     
                     if(sum<k) {
                         break;
                     }else if(sum==k) {
-                        if(queue.size() < cnt) {
+                        if(last-first+1 < cnt) {
                             answer[0] = first;
                             answer[1] = last;
-                            cnt = queue.size();
+                            cnt = last-first+1;
                         }
                     }
                 }
             }
             
-            if(idx==sequence.length) {
-                break;
-            }
+            // if(idx==sequence.length) {
+            //     break;
+            // }
         }
         
         return answer;
