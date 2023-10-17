@@ -9,31 +9,21 @@ class Solution {
             sum += sequence[idx];
             last = idx++;
             
-            if(sum==k) {
-                if(last-first+1 < cnt) {
-                    answer[0] = first;
-                    answer[1] = last;
-                    cnt = last-first+1;
-                }
-            }else if(sum>k) {
+            if(sum>=k) {
                 while(true) {
+                    if(sum==k && last-first+1 < cnt) {
+                        answer[0] = first;
+                        answer[1] = last;
+                        cnt = last-first+1;
+                    }
+                    
                     sum -= sequence[first++];
                     
                     if(sum<k) {
                         break;
-                    }else if(sum==k) {
-                        if(last-first+1 < cnt) {
-                            answer[0] = first;
-                            answer[1] = last;
-                            cnt = last-first+1;
-                        }
                     }
                 }
-            }
-            
-            // if(idx==sequence.length) {
-            //     break;
-            // }
+            }        
         }
         
         return answer;
