@@ -5,7 +5,7 @@ public class Main {
 
     static int n, k;
     static List<Node>[] list;
-    static List<PriorityQueue<Integer>> heap;
+    static List<PriorityQueue<Integer>> answerList;
 
     static class Node implements Comparable<Node> {
         int node;
@@ -29,13 +29,13 @@ public class Main {
         k = Integer.parseInt(st.nextToken()); //k번째 최단경로
 
         list = new ArrayList[n+1];
-        heap = new ArrayList<>();
+        answerList = new ArrayList<>();
 
         for(int i=0; i<=n; i++) {
             list[i] = new ArrayList<>();
-            heap.add(new PriorityQueue<>(Comparator.reverseOrder()));
+            answerList.add(new PriorityQueue<>(Comparator.reverseOrder()));
         }
-        heap.get(1).offer(0);
+        answerList.get(1).offer(0);
 
         for(int i=0; i<m; i++) {
             st = new StringTokenizer(br.readLine());
@@ -49,10 +49,10 @@ public class Main {
         dijkstra(1);
 
         for(int i=1; i<=n; i++) {
-            if(heap.get(i).size() < k) {
+            if(answerList.get(i).size() < k) {
                 System.out.println("-1");
             }else {
-                System.out.println(heap.get(i).peek());
+                System.out.println(answerList.get(i).peek());
             }
         }
     }
@@ -69,12 +69,12 @@ public class Main {
                 int nextNode = list[tmp.node].get(i).node;
                 int totalDistance = tmp.distance + list[tmp.node].get(i).distance;
 
-                if(heap.get(nextNode).size() < k) {
-                    heap.get(nextNode).offer(totalDistance);
+                if(answerList.get(nextNode).size() < k) {
+                    answerList.get(nextNode).offer(totalDistance);
                     pq.offer(new Node(nextNode, totalDistance));
-                }else if(heap.get(nextNode).peek() > totalDistance) {
-                    heap.get(nextNode).poll();
-                    heap.get(nextNode).offer(totalDistance);
+                }else if(answerList.get(nextNode).peek() > totalDistance) {
+                    answerList.get(nextNode).poll();
+                    answerList.get(nextNode).offer(totalDistance);
                     pq.offer(new Node(nextNode, totalDistance));
                 }
             }
