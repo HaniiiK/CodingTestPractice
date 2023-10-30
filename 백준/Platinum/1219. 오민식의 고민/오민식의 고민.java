@@ -45,17 +45,15 @@ public class Main {
         bellmanford();
     }
 
-    static private boolean bellmanford() {
+    static private void bellmanford() {
         long[] distance = new long[n];
         Arrays.fill(distance, Long.MIN_VALUE);
         distance[start] = makeMoney[start];
 
-        for (int i = 0; i < n+50; i++) {
+        for (int i = 0; i < n*2; i++) {
             for (int j = 0; j < m; j++) {
                 Node node = graph.get(j);
-                if (distance[node.v] == Long.MIN_VALUE) {
-                    continue;
-                }else if(distance[node.w] < distance[node.v] - node.weight + makeMoney[node.w]) {
+                if (distance[node.v] != Long.MIN_VALUE && distance[node.w] < distance[node.v] - node.weight + makeMoney[node.w]) {
                     distance[node.w] = distance[node.v]  - node.weight + makeMoney[node.w];
                     if(i>=n) {
                         distance[node.w] = Long.MAX_VALUE;
@@ -66,21 +64,13 @@ public class Main {
             }
         }
 
-        //gg 검증
         if (distance[end] == Long.MIN_VALUE) {
             System.out.println("gg");
-            return false;
-        }
-
-        //Gee 검증
-        if (distance[end] == Long.MAX_VALUE) {
+        }else if (distance[end] == Long.MAX_VALUE) {
             System.out.println("Gee");
-            return false;
+        }else {
+            System.out.println(distance[end]);
         }
-
-        //정답 출력
-        System.out.println(distance[end]);
-
-        return true;
     }
+    
 }
