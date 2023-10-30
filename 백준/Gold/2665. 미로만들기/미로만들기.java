@@ -4,10 +4,10 @@ import java.util.*;
 public class Main {
     static int n;
     static int[][] board;
-    static int[][] distance;
     static boolean[][] visited;
     static int[] moveX = {1, 0, -1, 0};
     static int[] moveY = {0, 1, 0, -1};
+    static int answer;
 
     static class Node {
         int x;
@@ -26,7 +26,7 @@ public class Main {
         n = Integer.parseInt(st.nextToken());
 
         board = new int[n][n];
-        distance = new int[n][n];
+        visited = new boolean[n][n];
 
         for(int i=0; i<n; i++) {
             st = new StringTokenizer(br.readLine());
@@ -38,38 +38,37 @@ public class Main {
                     board[i][j] = 0;
                 }
             }
-            Arrays.fill(distance[i], Integer.MAX_VALUE);
         }
 
-        visited = new boolean[n][n];
+        answer = Integer.MAX_VALUE;
+        bfs();
 
-        bfs1();
-
-        System.out.println(distance[n-1][n-1]);
+        System.out.println(answer);
     }
 
-    static private void bfs1() {
+    static private void bfs() {
         PriorityQueue<Node> pq = new PriorityQueue<>((o1, o2) -> Integer.compare(o1.cnt, o2.cnt));
 
-        distance[0][0] = 0;
         visited[0][0] = true;
         pq.offer(new Node(0, 0, 0));
 
         while(!pq.isEmpty()) {
             Node poll = pq.poll();
             visited[poll.x][poll.y] = true;
+            if(poll.x==n-1 && poll.y==n-1) {
+                answer = Math.min(answer, poll.cnt);
+            }
 
             for(int i=0; i<4; i++) {
                 int newX = poll.x + moveX[i];
                 int newY = poll.y + moveY[i];
-                if (newX >= 0 && newX < n && newY >= 0 && newY < n && !visited[newX][newY] && distance[poll.x][poll.y] < distance[newX][newY]) {
-                    if (board[newX][newY] == 1) {
-                        distance[newX][newY] = distance[poll.x][poll.y];
-                    } else {
-                        distance[newX][newY] = distance[poll.x][poll.y] + 1;
-                    }
+                if (newX >= 0 && newX < n && newY >= 0 && newY < n && !visited[newX][newY]) {
                     visited[newX][newY] = true;
-                    pq.offer(new Node(newX, newY, distance[newX][newY]));
+                    if (board[newX][newY] == 1) {
+                        pq.offer(new Node(newX, newY, poll.cnt));
+                    } else {
+                        pq.offer(new Node(newX, newY, poll.cnt+1));
+                    }
                 }
             }
         }
