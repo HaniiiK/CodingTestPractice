@@ -9,7 +9,7 @@ public class Main {
     static int[] moveY = {0, 1, 0, -1};
     static int answer;
 
-    static class Node {
+    static class Node implements Comparable<Node> {
         int x;
         int y;
         int cnt;
@@ -17,6 +17,10 @@ public class Main {
             this.x = x;
             this.y = y;
             this.cnt = cnt;
+        }
+        @Override
+        public int compareTo(Node o) {
+            return this.cnt - o.cnt;
         }
     }
 
@@ -47,7 +51,7 @@ public class Main {
     }
 
     static private void bfs() {
-        PriorityQueue<Node> pq = new PriorityQueue<>((o1, o2) -> Integer.compare(o1.cnt, o2.cnt));
+        PriorityQueue<Node> pq = new PriorityQueue<>();
 
         visited[0][0] = true;
         pq.offer(new Node(0, 0, 0));
