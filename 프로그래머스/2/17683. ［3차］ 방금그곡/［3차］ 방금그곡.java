@@ -21,21 +21,12 @@ class Solution {
             for(int j=0; j<repeat; j++) {
                 char c = strs[3].charAt(j%strs[3].length());
                 s += c;
-                // if(strs[3].charAt((j+1)%strs[3].length())=='#') {
-                //     s += strs[3].charAt((j+1)%strs[3].length());
-                //     j++;
-                //     repeat++;
-                // }
             }
             strs[3] = s;
-            System.out.println(strs[3]);
             
             //똑같은지 찾기
             if(strs[3].contains(m)) {
                 int idx = strs[3].indexOf(m)+m.length();
-                // if(idx<strs[3].length() && strs[3].charAt(idx)=='#') {
-                //     continue;
-                // }
                 
                 if(answer.equals("(None)")) {
                     answer = strs[2];        
